@@ -31,7 +31,7 @@ http.createServer(function(req,res){
                     break;
                 case 'login':
                 //1.检查用户是否存在
-                if(users[get1.name] == null){
+                if(users[get1.user] == null){
                     res.write('{"ok":false,"msg":"用户名不存在"}')
                 //2.检查用户密码
                 }else if(users[get1.user]!=get1.pass){

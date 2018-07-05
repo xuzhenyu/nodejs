@@ -15,13 +15,12 @@
     <script src="./jquery-3.3.1.min.js"></script>
     <script>
         $(function(){
-            var user_val = $('.user').val();
-            var pass_val = $('.secreat').val();
-            alert(user_val);
+            var user_val = $('.user');
+            var pass_val = $('.secreat');
             $('.regin').click(function(){
                 ajax({
                     url:'user',
-                    data:{act:"reg",user:user_val,pass:pass_val},
+                    data:{act:"reg",user:user_val.val(),pass:pass_val.val()},
                     type:'get',
                     success:function(data){
                         var json = eval('('+data+')');
@@ -32,7 +31,25 @@
                         }
                     },
                     error:function(){
-
+                        alert("通信错误");
+                    }
+                })
+            });
+            $('.login').click(function(){
+                ajax({
+                    url:'user',
+                    data:{act:"login",user:user_val.val(),pass:pass_val.val()},
+                    type:'get',
+                    success:function(data){
+                        var json = eval('('+data+')');
+                        if(json.ok){
+                            alert("登录成功！");
+                        }else{
+                            alert('登录失败'+json.msg);
+                        }
+                    },
+                    error:function(){
+                        alert("通信错误");
                     }
                 })
             })
