@@ -1,10 +1,8 @@
 const http = require('http');
 const fs = require('fs');
-const querystrong = require('querystring');
 const urllib = require('url');
 
 var users={}; //{"blue":"1234","zhangsan":"2455"}
-
 http.createServer(function(req,res){
     var str='';
     req.on('data',function(data){
@@ -15,12 +13,14 @@ http.createServer(function(req,res){
 
         const url = obj.pathname;
         const get1 = obj.query;
-        //const post = obj.querystrong.parse(str);
+        //console.log(req.url);
         //区分接口文件
         if(url=='/user'){
             switch(get1.act){
                 case 'reg':
                 //1.检查用户是否已经有了
+                // console.log(get1.user);
+                // console.log(get1);
                 if(users[get1.user]){
                     res.write('{"ok":false,"msg":"此用户已存在"}');
                 }else{
@@ -43,10 +43,10 @@ http.createServer(function(req,res){
                 default:
                     res.write('{"ok":false,"msg":"未知的act"}');
             }
+            console.log(users);
             res.end();
         }else{            
             //读取文件
-            console.log(url);
             var filename = '../login_regin'+url;
             fs.readFile(filename,function(err,data){
                 if(err){

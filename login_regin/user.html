@@ -19,11 +19,13 @@
             var pass_val = $('.secreat');
             $('.regin').click(function(){
                 ajax({
-                    url:'user',
+                    url:'/user',
                     data:{act:"reg",user:user_val.val(),pass:pass_val.val()},
                     type:'get',
                     success:function(data){
+                        console.log('1'+data);
                         var json = eval('('+data+')');
+                        console.log('2'+data);
                         if(json.ok){
                             alert("注册成功！");
                         }else{
